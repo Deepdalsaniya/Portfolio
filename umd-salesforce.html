@@ -135,9 +135,8 @@
     <div class="meta-row">
       <div class="m"><div class="k">Role</div><div class="v">Program Manager</div></div>
       <div class="m"><div class="k">Client</div><div class="v">UMD Division of Student Affairs</div></div>
-      <div class="m"><div class="k">Context</div><div class="v">Graduate practicum · UMD Smith</div></div>
       <div class="m"><div class="k">Stack</div><div class="v">Salesforce · Qualtrics</div></div>
-      <div class="m"><div class="k">Timeline</div><div class="v">Fall 2024</div></div>
+      <div class="m"><div class="k">Timeline</div><div class="v">Jan to Dec 2024</div></div>
     </div>
   </div>
 </header>
@@ -188,8 +187,75 @@
 </section>
 
 <section>
+  <style>
+    .tl-panel{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:24px 26px;overflow-x:auto}
+    .gantt{display:grid;grid-template-columns:170px repeat(12,1fr);gap:9px 4px;min-width:680px;align-items:center}
+    .gantt .mh{font-size:10.5px;color:var(--ink-dim);text-align:center}
+    .gantt .pl{font-size:13px;color:var(--ink);font-weight:500}
+    .gbar{height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#06181a;white-space:nowrap;padding:0 8px;overflow:hidden;text-overflow:ellipsis}
+    .gbar.disc{background:var(--teal-2)}
+    .gbar.build{background:var(--teal);color:#eef3f2}
+    .gbar.test{background:var(--gold)}
+    .gbar.brk{background:rgba(255,255,255,.06);color:var(--ink-dim);font-weight:500;border:1px dashed var(--line-2)}
+    .subh{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);font-weight:600;margin:32px 0 12px}
+    .mstone{display:flex;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-soft);line-height:1.55;max-width:860px}
+    .mstone:last-child{border:none}
+    .mstone .md{font-family:'Newsreader',serif;color:var(--teal-2);min-width:80px;font-size:15px}
+    .mstone b{color:var(--ink);font-weight:500}
+    .restable{width:100%;border-collapse:collapse;font-size:13.5px;max-width:860px}
+    .restable th,.restable td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top;line-height:1.5}
+    .restable th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);font-weight:600}
+    .restable td b{color:var(--ink);font-weight:500}
+    .restable td:last-child{color:var(--teal-2);white-space:nowrap}
+    .tl-note{font-size:12.5px;color:var(--ink-dim);font-style:italic;margin-top:16px;max-width:780px;line-height:1.6}
+  </style>
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">05 · RESULTS</span><h2>27 hours a week down to 8.5.</h2></div>
+    <div class="sec-head"><span class="sec-num">05 · TIMELINE, MILESTONES &amp; RESOURCES</span><h2>The plan: two semesters, a summer break, one handover.</h2></div>
+
+    <div class="tl-panel">
+      <div class="gantt">
+        <div></div>
+        <div class="mh">Jan</div><div class="mh">Feb</div><div class="mh">Mar</div><div class="mh">Apr</div><div class="mh">May</div><div class="mh">Jun</div><div class="mh">Jul</div><div class="mh">Aug</div><div class="mh">Sep</div><div class="mh">Oct</div><div class="mh">Nov</div><div class="mh">Dec</div>
+
+        <div class="pl">Discovery &amp; requirements</div>
+        <div class="gbar disc" style="grid-column:2 / 7">Interviews · process maps · design</div>
+
+        <div class="pl">Summer recess</div>
+        <div class="gbar brk" style="grid-column:7 / 9">Paused</div>
+
+        <div class="pl">Build (Salesforce sandbox)</div>
+        <div class="gbar build" style="grid-column:9 / 12">Three workstreams configured</div>
+
+        <div class="pl">Test, secure &amp; handover</div>
+        <div class="gbar test" style="grid-column:12 / 14">QA · security · training</div>
+      </div>
+    </div>
+
+    <div class="subh">Milestones</div>
+    <div>
+      <div class="mstone"><div class="md">May 2024</div><div><b>Requirements and system design signed off</b> with DSA. Data-flow diagrams, ERD, CRUD matrix, and the object and field schema approved.</div></div>
+      <div class="mstone"><div class="md">Sep 2024</div><div><b>Salesforce sandbox stood up</b> and the survey-automation workstream (Priority 1) built and running on record-triggered flows.</div></div>
+      <div class="mstone"><div class="md">Oct 2024</div><div><b>All three workstreams functional</b> in the sandbox: survey automation, Web-to-Case intake, and constituent CRM.</div></div>
+      <div class="mstone"><div class="md">Nov 2024</div><div><b>Test cycles complete</b> against client-approved 200-record datasets per workstream. Email-validation fix shipped after duplicate sends surfaced in testing.</div></div>
+      <div class="mstone"><div class="md">Dec 2024</div><div><b>DOIT technical review passed; documentation and handover delivered.</b> User guides and a training plan handed to DSA staff.</div></div>
+    </div>
+
+    <div class="subh">Resource allocation</div>
+    <table class="restable">
+      <tr><th>Function</th><th>Responsibility</th><th>People</th></tr>
+      <tr><td><b>Program management</b> (me)</td><td>Scope, client relationship, delivery plan, risk tracking, and handover</td><td>1</td></tr>
+      <tr><td><b>Salesforce build</b></td><td>Flows, Web-to-Case forms, page layouts, and email templates</td><td>2</td></tr>
+      <tr><td><b>Data &amp; QA</b></td><td>Test datasets, Qualtrics import, validation rules, and defect verification</td><td>1</td></tr>
+      <tr><td><b>Requirements &amp; docs</b></td><td>Requirements, CRUD and ERD, user guides, and training material</td><td>1</td></tr>
+      <tr><td><b>Client stakeholders</b></td><td>DSA staff (requirements, UAT, sign-off) and UMD DOIT (technical review)</td><td>partner</td></tr>
+    </table>
+    <p class="tl-note">Core delivery team of five, plus client-side stakeholders. Tooling: Salesforce sandbox, Qualtrics, Data Import Wizard, Salesforce Flows, and HTML Web-to-Case forms.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06 · RESULTS</span><h2>27 hours a week down to 8.5.</h2></div>
     <div class="results">
       <div class="ledger">
         <div class="top">Impact</div>
@@ -229,7 +295,7 @@
 
 <section>
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">06 · LEARNINGS</span><h2>The automation was the easy part.</h2></div>
+    <div class="sec-head"><span class="sec-num">07 · LEARNINGS</span><h2>The automation was the easy part.</h2></div>
     <ul class="learn">
       <li><b>Sandbox-only access</b> meant email workflows could not run end to end against production, so we built temporary in-sandbox checks and validated delivery within licensing limits.</li>
       <li><b>A shared Case object</b> across departments limited how far we could customize page layouts for VP-office use, solved with tailored permissions and layouts rather than new objects.</li>
@@ -241,7 +307,7 @@
 
 <section>
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">07 · WHAT I'D DO DIFFERENTLY TODAY</span><h2>From automated intake to intelligent intake.</h2></div>
+    <div class="sec-head"><span class="sec-num">08 · WHAT I'D DO DIFFERENTLY TODAY</span><h2>From automated intake to intelligent intake.</h2></div>
     <div class="prose">
       <p>I would replace the batch upload with a <b>real-time API integration</b> between Qualtrics and Salesforce, removing the largest source of latency and human error in the design.</p>
     </div>
