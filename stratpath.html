@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StratPath AI — Rubric-Grounded Assessment · Case Study · Deep Dalsaniya</title>
+
+<!-- SEO -->
+<meta name="description" content="StratPath AI: an LLM assessment platform that turns faculty rubrics into grounded, human-reviewed feedback. Deep Dalsaniya translated faculty needs into requirements, set acceptance criteria and review controls, and built the telemetry behind 1,000+ monthly users.">
+<link rel="canonical" href="https://deepdalsaniya.github.io/Portfolio/stratpath.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="StratPath AI — Rubric-Grounded Assessment">
+<meta property="og:description" content="A Bedrock/RAG assessment platform, taken 0 → 1,000+ users with $210K raised. Requirements, acceptance criteria, human-review controls, and 50K+ daily telemetry events.">
+<meta property="og:url" content="https://deepdalsaniya.github.io/Portfolio/stratpath.html">
+<meta property="og:image" content="https://deepdalsaniya.github.io/Portfolio/og-stratpath.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StratPath AI — Rubric-Grounded Assessment">
+<meta name="twitter:description" content="Faculty rubrics into grounded, human-reviewed feedback. 0 → 1,000+ users, $210K raised.">
+<meta name="twitter:image" content="https://deepdalsaniya.github.io/Portfolio/og-stratpath.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1c24;--bg-2:#13242e;--panel:#162a35;--ink:#eef3f2;--ink-soft:#a9bcc0;--ink-dim:#6f888f;
+    --teal:#3fb6a8;--teal-2:#62d4c2;--clay:#e08766;--gold:#dca24a;
+    --line:rgba(255,255,255,.09);--line-2:rgba(255,255,255,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gold);color:var(--bg)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 30px}
+  h1,h2,h3{font-family:'Newsreader',serif;font-weight:500;line-height:1.08;letter-spacing:-.005em}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;
+    background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:22px 22px}
+  nav,header,section,footer{position:relative;z-index:1}
+  a{color:inherit}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(15,28,36,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Newsreader',serif;font-size:20px;font-weight:600;letter-spacing:-.01em;text-decoration:none}
+  .brand b{color:var(--teal-2);font-weight:600}
+  .back{text-decoration:none;color:var(--ink-soft);font-size:14px;transition:color .2s}
+  .back:hover{color:var(--teal-2)}
+
+  header{padding:132px 0 70px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-2);margin-bottom:22px}
+  .eyebrow::before{content:"";width:30px;height:1px;background:var(--teal)}
+  h1.hero{font-size:clamp(34px,5.4vw,60px);font-weight:500;letter-spacing:-.02em;max-width:920px}
+  h1.hero i{font-style:italic;color:var(--teal-2);font-weight:400}
+  .hero-sub{font-size:17.5px;color:var(--ink-soft);max-width:720px;margin:26px 0 30px;line-height:1.7}
+  .hero-sub b{color:var(--ink);font-weight:500}
+  .meta-row{display:flex;flex-wrap:wrap;gap:26px;padding-top:24px;border-top:1px solid var(--line)}
+  .meta-row .m .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+  .meta-row .m .v{font-size:14.5px;color:var(--ink);margin-top:4px}
+
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  .sec-head{margin-bottom:36px;max-width:760px}
+  .sec-num{font-size:12px;color:var(--clay);letter-spacing:.16em;font-weight:500}
+  .sec-head h2{font-size:clamp(26px,3.6vw,38px);margin-top:12px;font-weight:500}
+  .sec-head .sub{color:var(--ink-soft);font-size:15.5px;margin-top:14px;line-height:1.7}
+  .prose p{color:var(--ink-soft);font-size:16px;margin-top:16px;line-height:1.75;max-width:780px}
+  .prose p b{color:var(--ink);font-weight:500}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  @media(max-width:760px){.grid3{grid-template-columns:1fr}}
+  .cell{background:var(--bg);padding:28px 26px;transition:background .3s}
+  .cell:hover{background:var(--panel)}
+  .cell .idx{font-family:'Newsreader',serif;font-size:14px;font-style:italic;color:var(--clay)}
+  .cell h3{font-size:20px;margin:8px 0 10px;font-weight:500}
+  .cell p{color:var(--ink-soft);font-size:14px;line-height:1.6}
+
+  /* RAG flow */
+  .pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:4px}
+  .pnode{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:14px 16px;font-size:13px;color:var(--ink-soft);flex:1 1 130px;min-width:130px;display:flex;align-items:center;line-height:1.4}
+  .pnode b{color:var(--ink);font-weight:500}
+  .parrow{align-self:center;color:var(--teal);font-size:16px}
+  @media(max-width:760px){.parrow{display:none}.pnode{flex-basis:100%}}
+  .gate{margin-top:14px;border:1px dashed var(--line-2);border-radius:9px;padding:14px 16px;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  .gate b{color:var(--gold);font-weight:500}
+
+  /* FLOW steps */
+  .flow{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden;max-width:840px}
+  .flow .step{padding:20px 26px;border-bottom:1px solid var(--line);display:flex;gap:18px;align-items:flex-start}
+  .flow .step:last-child{border:none}
+  .flow .step:hover{background:rgba(63,182,168,.06)}
+  .flow .mk{font-family:'Newsreader',serif;font-style:italic;font-size:20px;color:var(--clay);min-width:26px}
+  .flow .step h4{font-size:15px;font-weight:600;margin-bottom:3px;letter-spacing:.01em}
+  .flow .step p{font-size:13.5px;color:var(--ink-soft);margin:0;line-height:1.55}
+
+  /* RESULTS ledger */
+  .results{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
+  @media(max-width:820px){.results{grid-template-columns:1fr;gap:30px}}
+  .ledger{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+  .ledger .top{padding:14px 20px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+  .ledger .row{padding:16px 20px;border-bottom:1px solid var(--line)}
+  .ledger .row:last-child{border:none}
+  .ledger .n{font-family:'Newsreader',serif;font-size:30px;color:var(--teal-2);line-height:1}
+  .ledger .d{font-size:12.5px;color:var(--ink-soft);margin-top:5px}
+  .adopt{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:26px 28px}
+  .adopt h4{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);font-weight:600;margin-bottom:6px}
+  .adopt p{font-size:15px;color:var(--ink-soft);line-height:1.7;margin-top:12px}
+  .adopt p b{color:var(--ink);font-weight:500}
+
+  .learn{list-style:none;display:flex;flex-direction:column;gap:14px;max-width:820px}
+  .learn li{font-size:15px;color:var(--ink-soft);padding-left:24px;position:relative;line-height:1.65}
+  .learn li::before{content:"·";position:absolute;left:0;color:var(--teal)}
+  .learn li b{color:var(--ink);font-weight:500}
+
+  .callout{border:1px solid rgba(63,182,168,.3);background:rgba(63,182,168,.06);border-radius:12px;padding:24px 26px;max-width:840px;margin-top:8px}
+  .callout p{color:var(--ink-soft);font-size:15.5px;line-height:1.75}
+  .callout p b{color:var(--ink)}
+  .disclaimer{font-size:12.5px;color:var(--ink-dim);margin-top:20px;max-width:780px;font-style:italic}
+
+  .btn{text-decoration:none;font-weight:500;font-size:14.5px;padding:13px 26px;border-radius:7px;transition:all .25s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary{background:var(--teal);color:#06181a}
+  .btn-primary:hover{background:var(--teal-2)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal-2)}
+  .links{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  footer{text-align:center;padding:36px 0 54px;color:var(--ink-dim);font-size:13px;border-top:1px solid var(--line)}
+  footer b{color:var(--teal-2);font-weight:500}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">Deep <b>Dalsaniya</b></a>
+    <a class="back" href="index.html#work">← Back to work</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow">Case Study · AI Product / Strategy</span>
+    <h1 class="hero">Turning faculty rubrics into feedback students trust, <i>with a human still in the loop.</i></h1>
+    <p class="hero-sub">Business-school faculty spend hours giving each student rubric-grounded feedback, and it still comes out slow and uneven. <b>StratPath AI</b> is the Bedrock/RAG platform I co-founded to fix that: it grounds every response in the professor's own rubric and materials, gates it behind acceptance criteria and human review, and proves it works with telemetry. I owned product strategy, requirements, and controls, taking it from <b>zero to 1,000+ monthly users and $210K raised</b>.</p>
+    <div class="meta-row">
+      <div class="m"><div class="k">Role</div><div class="v">Cofounder &amp; Product Lead</div></div>
+      <div class="m"><div class="k">Stack</div><div class="v">AWS Bedrock · RAG · SQL</div></div>
+      <div class="m"><div class="k">Team</div><div class="v">6-person eng &amp; data</div></div>
+      <div class="m"><div class="k">Timeline</div><div class="v">Feb 2025 – Jan 2026</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01 · THE PROBLEM</span><h2>Good feedback doesn't scale, and generic AI feedback isn't trusted.</h2></div>
+    <div class="prose">
+      <p>Business-school assessment has a structural bottleneck: the feedback that actually helps a student is <b>tied to a specific rubric, a specific assignment, and a specific instructor's intent</b>, and producing it by hand is slow and inconsistent across sections and graders. The obvious shortcut, a general-purpose chatbot, fails the moment a professor reads the output: it invents criteria, praises what the rubric penalizes, and can't cite where a judgment came from. Faculty won't put their name behind feedback they can't trace, and students can tell when it's boilerplate.</p>
+      <p>So the real requirement was never "generate feedback." It was <b>generate feedback a professor is willing to sign</b> — grounded in their materials, consistent with their rubric, and reviewable before it reaches a student.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02 · FROM FACULTY NEEDS TO REQUIREMENTS</span><h2>I sat with the people who owned the rubric.</h2><p class="sub">Professors supplied the rubrics, course materials, and lecture recordings. My job was to turn what they meant by "good feedback" into something a system could execute and a human could check.</p></div>
+    <div class="grid3">
+      <div class="cell"><div class="idx">i.</div><h3>Grounding sources</h3><p>Rubrics, assignment briefs, course readings, and lecture recordings became the retrieval corpus, so every response cites the instructor's own material, not the open web.</p></div>
+      <div class="cell"><div class="idx">ii.</div><h3>Requirements</h3><p>I translated faculty expectations into explicit product requirements: what a response must reference, what it must never claim, and where a human has to sign off.</p></div>
+      <div class="cell"><div class="idx">iii.</div><h3>Acceptance criteria</h3><p>Each feedback type shipped with pass/fail criteria — rubric coverage, citation to source, and tone — that an output had to meet before it was allowed to surface.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03 · THE WORKFLOW</span><h2>Retrieve, ground, check, then let a human decide.</h2><p class="sub">A Bedrock/RAG pipeline produces rubric-grounded feedback; nothing reaches a student without clearing the criteria and, where it matters, a human-review gate.</p></div>
+    <div class="pipe">
+      <div class="pnode"><b>Rubric + materials</b> (per course)</div><div class="parrow">→</div>
+      <div class="pnode">Retrieval over instructor corpus</div><div class="parrow">→</div>
+      <div class="pnode"><b>Bedrock</b> grounded generation</div><div class="parrow">→</div>
+      <div class="pnode">Acceptance-criteria check</div><div class="parrow">→</div>
+      <div class="pnode"><b>Human-review gate</b></div><div class="parrow">→</div>
+      <div class="pnode">Feedback to student</div>
+    </div>
+    <div class="gate"><b>Control →</b> output that fails rubric coverage or can't cite its source is held back, not shown. Faculty review sits on the path where the stakes justify it, so the system assists judgment instead of replacing it.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04 · HOW I RAN IT</span><h2>Product strategy, delivery, and the numbers to raise on.</h2></div>
+    <div class="flow">
+      <div class="step"><div class="mk">1</div><div><h4>Strategy &amp; roadmap</h4><p>Owned product strategy, roadmap, and prioritization from zero, sequencing what to build against what faculty would actually adopt.</p></div></div>
+      <div class="step"><div class="mk">2</div><div><h4>Requirements &amp; controls</h4><p>Turned faculty needs into PRDs, acceptance criteria, and the human-review gates that made the output trustworthy.</p></div></div>
+      <div class="step"><div class="mk">3</div><div><h4>Agile delivery</h4><p>Ran delivery across a 6-person engineering and data team — PRDs, backlog, and ceremonies.</p></div></div>
+      <div class="step"><div class="mk">4</div><div><h4>Telemetry &amp; instrumentation</h4><p>Built SQL + AWS telemetry tracking 50,000+ events a day, so adoption, satisfaction, and failure modes were measured, not assumed.</p></div></div>
+      <div class="step"><div class="mk">5</div><div><h4>Funding</h4><p>Built the business cases, scenario analyses, and investor materials that secured $130K from UM Ventures and $80K from UMD Smith School.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05 · RESULTS</span><h2>Adopted, funded, and measured.</h2></div>
+    <div class="results">
+      <div class="ledger">
+        <div class="top">Impact</div>
+        <div class="row"><div class="n">0 → 1,000+</div><div class="d">monthly users across faculty pilots</div></div>
+        <div class="row"><div class="n">$210K</div><div class="d">raised ($130K UM Ventures + $80K UMD Smith)</div></div>
+        <div class="row"><div class="n">50K+/day</div><div class="d">telemetry events on the SQL/AWS tracking I built</div></div>
+        <div class="row"><div class="n">90% ↓</div><div class="d">manual review, at 97% user satisfaction</div></div>
+      </div>
+      <div class="adopt">
+        <h4>What the telemetry was for</h4>
+        <p>The 50,000+ daily events weren't a vanity dashboard. They were how we saw <b>which feedback types faculty actually kept, which ones they overrode, and where the model was drifting off-rubric</b>. Instrumenting adoption and override behavior is what let a small team run pilots responsibly instead of shipping blind.</p>
+        <p>Sustaining <b>97% user satisfaction</b> while cutting manual review 90% only held because the human-review gate stayed on the path where the stakes justified it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06 · WHAT THE DATA CHANGED</span><h2>The findings moved the roadmap, not the other way around.</h2></div>
+    <div class="prose">
+      <p>The telemetry didn't just report on the product; it re-ordered it. Where the data showed faculty consistently <b>overriding a feedback type</b>, that signaled the grounding or the acceptance criteria were wrong, and it moved up the backlog ahead of net-new features. Where adoption clustered, the rollout followed the evidence instead of the original plan. That is the loop I care about: instrument the AI, read the override behavior honestly, and let it decide what ships next.</p>
+    </div>
+    <div class="callout">
+      <p>The transferable pattern here is exactly what a regulated analytics team needs from AI: <b>faculty owned the ground truth, the system stayed grounded in it, acceptance criteria and human review gated the output, and telemetry proved whether it was trusted in practice</b> — then the roadmap answered to that evidence.</p>
+    </div>
+    <p class="disclaimer">Figures are from StratPath's pilot period (Feb 2025 – Jan 2026): 1,000+ monthly users, $210K raised, and telemetry measured at 50,000+ events per day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">07 · LEARNINGS</span><h2>Trust was the product; the model was a component.</h2></div>
+    <ul class="learn">
+      <li><b>Grounding beats fluency.</b> Faculty didn't want a smarter writer; they wanted feedback they could trace to their own rubric and materials, which is why RAG over the instructor corpus mattered more than model choice.</li>
+      <li><b>The human-review gate is a feature, not a fallback.</b> Keeping a person on the high-stakes path is what got faculty to adopt at all, and what kept satisfaction at 97% while manual effort fell.</li>
+      <li><b>Instrument overrides, not just usage.</b> The most useful signal wasn't how often the tool was used, it was how often faculty corrected it — that's where the roadmap came from.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="links">
+      <a class="btn btn-primary" href="mailto:dalsaniyadeep111@gmail.com?subject=StratPath%20AI%20walkthrough">Request a walkthrough →</a>
+      <a class="btn btn-ghost" href="index.html#work">← Back to all work</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Deep Dalsaniya · <b>AI-Enabled Operations · Analysis · Product</b> · M.S. Information Systems, UMD
+</footer>
+
+</body>
+</html>
